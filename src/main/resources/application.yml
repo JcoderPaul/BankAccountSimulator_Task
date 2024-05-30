@@ -1,0 +1,27 @@
+logging:
+  level:
+    root: INFO
+    org.springframework.jdbc.core: TRACE
+  file.name: Logs/oldboy.log
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5434/
+    username: postgres
+    password: pass
+    driver-class-name: org.postgresql.Driver
+  mvc:
+    format:
+      date: iso
+  jpa:
+    properties.hibernate:
+      batch_size: 50
+      fetch_size: 50
+      show_sql: true
+      format_sql: true
+      hbm2ddl.auto: validate
+    open-in-view: false
+
+security:
+  jwt:
+    secret: 4261656C64756E674261656C64756E674261656C64756E674261656C64756E67
