@@ -1,6 +1,3 @@
---liquibase formatted sql
-
---changeset oldboy:1
 CREATE TABLE IF NOT EXISTS accounts
 (
     account_id BIGSERIAL PRIMARY KEY ,
@@ -10,7 +7,6 @@ CREATE TABLE IF NOT EXISTS accounts
     pass VARCHAR(128) NOT NULL DEFAULT '{noop}123'
 );
 
---changeset oldboy:2
 CREATE TABLE IF NOT EXISTS users
 (
     id BIGSERIAL PRIMARY KEY ,
@@ -22,7 +18,6 @@ CREATE TABLE IF NOT EXISTS users
     birth_date DATE NOT NULL
 );
 
---changeset oldboy:3
 CREATE TABLE IF NOT EXISTS amounts
 (
     id BIGSERIAL PRIMARY KEY ,
@@ -35,7 +30,6 @@ CREATE TABLE IF NOT EXISTS amounts
     interest NUMERIC CONSTRAINT interest_balance CHECK (interest >= 0)
 );
 
---changeset oldboy:4
 CREATE TABLE IF NOT EXISTS emails
 (
     id SERIAL PRIMARY KEY ,
