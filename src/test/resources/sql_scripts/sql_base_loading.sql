@@ -9,6 +9,7 @@ VALUES (1,'Gena12', 111111),
        (7,'tamtudoid', 777777),
        (8,'lovkach', 888888),
        (9,'shnepsel', 999999);
+SELECT SETVAL('accounts_account_id_seq', (SELECT MAX(account_id) FROM accounts));
 
 -- Загрузим данные клиентов
 INSERT INTO users (account_id, lastname, firstname, patronymic, birth_date)
@@ -23,17 +24,17 @@ VALUES ((SELECT account_id FROM accounts WHERE account_id = 1),'Зеленов',
        ((SELECT account_id FROM accounts WHERE account_id = 9),'Березин','Ефим','Иосифович','1919-11-11');
 
 -- Подогреем клиентов деньгами
-INSERT INTO amounts (account_id, amount, start_limit, stop_limit, count_period, interest)
-VALUES ((SELECT account_id FROM accounts WHERE account_id = 1), 1234.05, 1234.05, 2554.48, 0, 0),
-       ((SELECT account_id FROM accounts WHERE account_id = 2), 245.45, 245.45, 508.08, 0, 0),
-       ((SELECT account_id FROM accounts WHERE account_id = 3), 1400.35, 1400.35, 2898.72, 0, 0),
-       ((SELECT account_id FROM accounts WHERE account_id = 4), 2245.45, 2245.45, 4648.08, 0, 0),
-       ((SELECT account_id FROM accounts WHERE account_id = 5), 6400.35, 6400.35, 13248.72, 0, 0),
-       ((SELECT account_id FROM accounts WHERE account_id = 6), 2345.45, 2345.45, 4855.08, 0, 0),
-       ((SELECT account_id FROM accounts WHERE account_id = 7), 24000.35, 24000.35, 49680.72, 0, 0),
-       ((SELECT account_id FROM accounts WHERE account_id = 8), 2645.45, 2645.45, 5476.08, 0, 0),
-       ((SELECT account_id FROM accounts WHERE account_id = 9), 14500.35, 14500.35, 30015.72, 0, 0);
-
+INSERT INTO amounts (id, account_id, amount, start_limit, stop_limit, count_period, interest)
+VALUES (1, (SELECT account_id FROM accounts WHERE account_id = 1), 1234.05, 1234.05, 2554.48, 0, 0),
+       (2, (SELECT account_id FROM accounts WHERE account_id = 2), 245.45, 245.45, 508.08, 0, 0),
+       (3, (SELECT account_id FROM accounts WHERE account_id = 3), 1400.35, 1400.35, 2898.72, 0, 0),
+       (4, (SELECT account_id FROM accounts WHERE account_id = 4), 2245.45, 2245.45, 4648.08, 0, 0),
+       (5, (SELECT account_id FROM accounts WHERE account_id = 5), 6400.35, 6400.35, 13248.72, 0, 0),
+       (6, (SELECT account_id FROM accounts WHERE account_id = 6), 2345.45, 2345.45, 4855.08, 0, 0),
+       (7, (SELECT account_id FROM accounts WHERE account_id = 7), 24000.35, 24000.35, 49680.72, 0, 0),
+       (8, (SELECT account_id FROM accounts WHERE account_id = 8), 2645.45, 2645.45, 5476.08, 0, 0),
+       (9, (SELECT account_id FROM accounts WHERE account_id = 9), 14500.35, 14500.35, 30015.72, 0, 0);
+SELECT SETVAL('amounts_id_seq', (SELECT MAX(id) FROM amounts));
 
 INSERT INTO emails (user_id, user_email)
 VALUES ((SELECT id FROM users WHERE account_id = 1), 'kroki@yandex.ru'),
