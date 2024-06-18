@@ -5,7 +5,6 @@ import org.junit.jupiter.api.*;
 import prod.oldboy.database.entity.Amount;
 import prod.oldboy.integration.IntegrationTestBase;
 import prod.oldboy.repository.amount_repo.AmountRepository;
-
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +20,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class AmountRepositoryTestIT extends IntegrationTestBase {
 
     private final AmountRepository amountRepository;
+    private final Map<Long, BigDecimal> unchangedAmounts = new HashMap<>();
+    private final BigDecimal amountIncrease = BigDecimal.valueOf(50);
 
     @Test
     void checkFindAllTest() {
@@ -43,8 +44,6 @@ class AmountRepositoryTestIT extends IntegrationTestBase {
     @Test
     void updateAllAmountsDepositTest() {
         List<Amount> currentAmounts = amountRepository.findAll();
-        Map<Long, BigDecimal> unchangedAmounts = new HashMap<>();
-        BigDecimal amountIncrease = BigDecimal.valueOf(50);
 
         for (Amount amount: currentAmounts) {
             unchangedAmounts.put(amount.getId(), amount.getAmount());
